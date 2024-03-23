@@ -19,9 +19,6 @@ class ExpectingDateTimeFormat(Expecting):
         except (ValueError, TypeError):
             return False
 
-    def __ne__(self, other: Any) -> bool:
-        return not self.__eq__(other)
-
 
 def iso8601_full() -> Expecting:
     return ExpectingDateTimeFormat('%Y-%m-%dT%H:%M:%S.%f%z')

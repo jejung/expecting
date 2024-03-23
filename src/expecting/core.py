@@ -8,7 +8,7 @@ class Expecting(ABC):
         return False
 
     def __ne__(self, other: Any) -> bool:
-        return False
+        return not self.__eq__(other)
 
 
 __all__ = [

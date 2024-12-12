@@ -1,15 +1,18 @@
 import operator
+import sys
 from decimal import Decimal
 from typing import Callable, Literal, Union
 
 from expecting.core import Expecting
 
-SupportedOperation = (Literal['>=']
-                      | Literal['<=']
-                      | Literal['>']
-                      | Literal['<']
-                      | Literal['==']
-                      | Literal['!='])
+SupportedOperation = Union[
+    Literal['>=']
+  , Literal['<=']
+  , Literal['>']
+  , Literal['<']
+  , Literal['==']
+  , Literal['!=']
+]
 
 KnownNumberType = Union[int, float, Decimal]
 
@@ -34,7 +37,7 @@ class ExpectingNumber(Expecting):
             return operator.ne
 
     def __eq__(self, other):
-        if not isinstance(other, KnownNumberType):
+        if not isinstance(other, KnownNumberType if sys.version_info[:2] > (3, 9) else (int, float, Decimal)):
             return False
 
         return self.resolve_op()(other, self.right_side)

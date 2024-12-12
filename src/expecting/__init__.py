@@ -4,4 +4,6 @@ __all__ = [
     'core',
     'string',
     'list',
+    'dict',
+    'number',
 ]

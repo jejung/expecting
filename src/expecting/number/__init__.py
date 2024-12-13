@@ -43,7 +43,7 @@ class ExpectingNumber(Expecting):
         return self.resolve_op()(other, self.right_side)
 
     def __repr__(self) -> str:
-        return f'~= number {self.op} {self.right_side}'
+        return f'~= <number {self.op} {self.right_side}>'
 
 
 def ge(right: KnownNumberType) -> ExpectingNumber:

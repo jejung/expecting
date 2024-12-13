@@ -21,7 +21,7 @@ class ExpectingDictContaining(Expecting):
         return True
 
     def __repr__(self) -> str:
-        return f"~= {self.expected}"
+        return f"~= <{self.expected!r}>"
 
 
 def containing(expected: Dict[Any, Union[Any, Expecting]]) -> Expecting:

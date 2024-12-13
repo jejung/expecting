@@ -21,8 +21,8 @@ class ExpectingUuidHex(Expecting):
 
     def __repr__(self) -> str:
         if self.expected_version is None:
-            return '~= UUID hex string'
-        return f'~= UUIDv{self.expected_version} hex string'
+            return '~= <UUID hex as string>'
+        return f'~= <UUIDv{self.expected_version} hex as string>'
 
 
 def v1() -> Expecting:

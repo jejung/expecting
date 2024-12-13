@@ -12,7 +12,7 @@ class ExpectingListUnordered(Expecting):
         self.expected = expected
 
     def __repr__(self) -> str:
-        return f'~= {self.expected!r}'
+        return f'~= <{self.expected!r}>'
 
     def __eq__(self, current: Any) -> bool:
         if not isinstance(current, (list, tuple)):

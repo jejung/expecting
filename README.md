@@ -6,7 +6,7 @@ This is currently a work in progress.
 
 * [`expecting.dict`](#expectingdict): Dictionary assertions, combined with other assertions makes it easier to verify complex dictionary schemas.
 * [`expecting.list`](./src/expecting/dict): Utility assertions, like order agnostic comparisons.
-* [`expecting.list`](./src/expecting/enum): Enum related assertions, checking values, names, or instances.
+* [`expecting.enum`](./src/expecting/enum): Enum related assertions, checking values, names, or instances.
 * [`expecting.number`](./src/expecting/number): Simple number comparisons, the small building blocks for more complex structured data checking.
 * [`expecting.string`](./src/expecting/string): A variety of formats like date and time, URL, UUID.
 
@@ -75,6 +75,7 @@ Feel free to create issues or merge requests with any improvement or fix you mig
   * [`containing`](#expectinglistcontaining)
   * [`unordered`](#expectinglistunordered)
 * [`expecting.number`](#expectingnumber)
+  * [`expecting.number.any`](#expectingnumberany)
   * [`expecting.number.ge`](#expectingnumberge)
   * [`expecting.number.le`](#expectingnumberle)
   * [`expecting.number.gt`](#expectingnumbergt)
@@ -167,6 +168,20 @@ assert current == expecting.list.unordered([3, 1, 2])
 Disclaimer: of course writing `assert a >= 1` is much easier and should be the preferred way to.
 
 The functions under this namespace are intended for combined usage with other expecting objects for complex schema validations.
+
+### `expecting.number.any`
+
+Asserts any type of number.
+
+```python
+import expecting.number
+
+
+assert 1 == expecting.number.any()
+assert 0 == expecting.number.any()
+assert -1.4 == expecting.number.any()
+assert 'inf' == expecting.number.any()
+```
 
 ### `expecting.number.ge`
 

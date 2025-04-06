@@ -1,9 +1,9 @@
 import operator
 import sys
 from decimal import Decimal
-from typing import Callable, Literal, Union
+from typing import Callable, Literal, Union, Any
 
-from expecting.core import Expecting
+from expecting.core import Expecting, LambdaExpecting
 
 SupportedOperation = Union[
     Literal['>=']
@@ -44,6 +44,19 @@ class ExpectingNumber(Expecting):
 
     def __repr__(self) -> str:
         return f'~= <number {self.op} {self.right_side}>'
+
+
+def any() -> Expecting:
+    def is_float(target: Any) -> bool:
+        try:
+            float(target)
+            return True
+        except (ValueError, TypeError):
+            return False
+    return LambdaExpecting(
+        eqcheck=is_float,
+        repr=lambda: '~= <a valid number representation>',
+    )
 
 
 def ge(right: KnownNumberType) -> ExpectingNumber:

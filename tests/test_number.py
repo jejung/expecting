@@ -1,3 +1,5 @@
+from typing import Any
+
 import pytest
 
 import expecting.number
@@ -178,3 +180,38 @@ def test_number_ne_matches(left, right) -> None:
 def test_number_ne_does_not_match(left, right) -> None:
     assert left != expecting.number.ne(right)
 
+
+
+@pytest.mark.parametrize(
+    'value',
+    (
+        0,
+        1,
+        -1,
+        4.5,
+        -4.5,
+        '0',
+        '1',
+        '-1',
+        '-4.5',
+        '4.5',
+        '-0',
+        'inf',
+        '-inf',
+        True,
+        False,
+    )
+)
+def test_any_matches(value: Any) -> None:
+    assert value == expecting.number.any()
+
+
+@pytest.mark.parametrize(
+    'value',
+    (
+        None,
+        object(),
+    )
+)
+def test_any_does_not_match(value: Any) -> None:
+    assert value != expecting.number.any()

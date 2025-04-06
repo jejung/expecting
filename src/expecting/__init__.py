@@ -2,8 +2,9 @@ from . import core, string
 
 __all__ = [
     'core',
-    'string',
-    'list',
+    'enum',
     'dict',
+    'list',
     'number',
+    'string',
 ]

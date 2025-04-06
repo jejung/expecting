@@ -6,6 +6,7 @@ This is currently a work in progress.
 
 * [`expecting.dict`](#expectingdict): Dictionary assertions, combined with other assertions makes it easier to verify complex dictionary schemas.
 * [`expecting.list`](./src/expecting/dict): Utility assertions, like order agnostic comparisons.
+* [`expecting.list`](./src/expecting/enum): Enum related assertions, checking values, names, or instances.
 * [`expecting.number`](./src/expecting/number): Simple number comparisons, the small building blocks for more complex structured data checking.
 * [`expecting.string`](./src/expecting/string): A variety of formats like date and time, URL, UUID.
 
@@ -68,6 +69,8 @@ Feel free to create issues or merge requests with any improvement or fix you mig
 
 * [`expecting.dict`](#expectingdict)
   * [`containing`](#expectingdictcontaining)
+* [`expecting.enum`](#expectingenum)
+  * [`any_value_of`](#expectingenumany_value_of)
 * [`expecting.list`](#expectinglist)
   * [`containing`](#expectinglistcontaining)
   * [`unordered`](#expectinglistunordered)
@@ -99,7 +102,7 @@ Feel free to create issues or merge requests with any improvement or fix you mig
 
 ### `expecting.dict.containing`
 
-Asserts that a dictionary contains a sub-dictionary. Can
+Asserts that a dictionary contains a sub-dictionary.
 
 ```python
 import expecting
@@ -112,6 +115,24 @@ assert current == expecting.dict.containing({
     'positions': expecting.list.containing([(2, 3)]),
     'color': 'yellow',
 })
+```
+
+## `expecting.enum`
+
+### `expecting.enum.any_value_of`
+
+Asserts that a value represents a specific enum.
+
+```python
+import expecting
+from enum import Enum
+
+
+class AnyEnum(str, Enum):
+    OK = 'OK'
+
+assert 'OK' == expecting.enum.any_value_of(AnyEnum)
+assert 'NOK' != expecting.enum.any_value_of(AnyEnum)
 ```
 
 ## `expecting.list`

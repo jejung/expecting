@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "expecting"
-version = "0.0.6"
+version = "0.0.7"
 description = "Elegant assertions library"
 authors = ["Jean Jung <jean.jung@rocketmail.com>"]
 readme = "README.md"

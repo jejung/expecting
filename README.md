@@ -92,6 +92,14 @@ Feel free to create issues or merge requests with any improvement or fix you mig
     * [`expecting.string.datetime.iso8601_day`](#expectingstringdatetimeiso8601_day)
     * [`expecting.string.datetime.iso8601_month`](#expectingstringdatetimeiso8601_month)
     * [`expecting.string.datetime.iso8601_year`](#expectingstringdatetimeiso8601_year)
+  * [`expecting.string.url`](#expectingstringurl)
+    * [`expecting.string.url.with_scheme`](#expectingstringurlwith_scheme)
+    * [`expecting.string.url.with_netloc`](#expectingstringurlwith_netloc)
+    * [`expecting.string.url.with_path`](#expectingstringurlwith_path)
+    * [`expecting.string.url.with_query`](#expectingstringurlwith_query)
+    * [`expecting.string.url.with_fragment`](#expectingstringurlwith_fragment)
+    * [`expecting.string.url.with_components`](#expectingstringurlwith_components)
+    * [`expecting.string.url.any`](#expectingstringurlany)
   * [`expecting.string.uuid`](#expectingstringuuid)
     * [`expecting.string.uuid.v1`](#expectingstringuuidv1)
     * [`expecting.string.uuid.v3`](#expectingstringuuidv3)
@@ -332,6 +340,98 @@ from datetime import datetime
 import expecting
 
 assert datetime.now().strftime('%Y') == expecting.string.datetime.iso8601_year()
+```
+
+### `expecting.string.url`
+### `expecting.string.url.with_scheme`
+
+Assert that a string is a valid URL with the given scheme.
+
+```python
+import expecting
+
+assert 'https://example.com' == expecting.string.url.with_scheme('https')
+```
+
+### `expecting.string.url.with_netloc`
+
+Assert that a string is a valid URL with the given netloc (host and optionally port).
+
+```python
+import expecting
+
+assert 'https://example.com:8080' == expecting.string.url.with_netloc('example.com:8080')
+assert 'https://example.com' == expecting.string.url.with_netloc('example.com')
+assert 'http://example.com' == expecting.string.url.with_netloc('example.com')
+```
+
+### `expecting.string.url.with_path`
+
+Assert that a string is a valid URL with the given path.
+
+```python
+import expecting
+
+assert 'https://example.com/' == expecting.string.url.with_path('/')
+assert 'https://example.com' == expecting.string.url.with_path('')
+assert 'https://example.com/some/subfolder' == expecting.string.url.with_path('/some/subfolder')
+```
+
+
+### `expecting.string.url.with_query`
+
+Assert that a string is a valid URL with the given query string.
+
+```python
+import expecting
+
+assert 'http://example.com?key=value' == expecting.string.url.with_query('key=value')
+assert 'http://example.com?key=value&other' == expecting.string.url.with_query('key=value&other')
+assert 'http://example.com?' == expecting.string.url.with_query('')
+assert 'http://example.com' == expecting.string.url.with_query('')
+```
+
+
+### `expecting.string.url.with_fragment`
+
+Assert that a string is a valid URL with the given fragment.
+
+```python
+import expecting
+
+assert 'https://example.com/path#anchor' == expecting.string.url.with_fragment('anchor')
+assert 'https://example.com/path#' == expecting.string.url.with_fragment('')
+assert 'https://example.com/path' == expecting.string.url.with_fragment('')
+assert 'https://example.com' == expecting.string.url.with_fragment('')
+```
+
+
+### `expecting.string.url.with_components`
+
+Assert that a string is a valid URL with the given components.
+
+```python
+import expecting
+
+assert 'https://example.com/path?query=1#anchor' == expecting.string.url.with_components(
+    scheme='https',
+    netloc='example.com',
+    path='/path',
+    query='query=1',
+    fragment='anchor',
+)
+```
+
+
+### `expecting.string.url.any`
+
+Assert that a string is a valid URL.
+
+```python
+import expecting
+
+assert 'https://example.com/path?query=1#anchor' == expecting.string.url.any()
+assert 'ws://127.0.0.1/ws/' == expecting.string.url.any()
 ```
 
 ### `expecting.string.uuid`

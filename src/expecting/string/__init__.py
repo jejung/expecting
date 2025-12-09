@@ -1,6 +1,7 @@
-from . import datetime, uuid
+from . import datetime, uuid, url
 
 __all__ = [
     'datetime',
     'uuid',
+    'url',
 ]
